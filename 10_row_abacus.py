@@ -40,6 +40,7 @@
 # 4 STARS: 0 < lines <= 3
 
 def print_abacus(num):
+    # ex. for 12345678 -> "0012345678"
     for i in [int(i) for i in "0" * (10 - len(str(num))) + str(num)]:
         print("|00000*****|"[0:11-i] + "   " + "|00000*****|"[11-i:])
 

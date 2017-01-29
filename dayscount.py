@@ -24,21 +24,21 @@ def isLeapYear(year):
 
 # y1,m1,d1 is birthday, y2,m2,d2 is current date
 def days_between_dates(y1,m1,d1,y2,m2,d2):
- 	if (y1 > y2) or (y1 == y2 and m1 > m2) or (y1 == y2 and m1 == m2 and d1 >= d2):
- 		print('incorrect input!')
- 		return None
- 	counter = 0
- 	while (y1 < y2) or (m1 < m2) or (d1 < d2):
- 		# year end pattern
- 		if m1 == 12 and d1 == isLeapYear(y1)[11]:
- 			y1, m1, d1, counter = y1 + 1, 1, 1, counter + 1
- 		# month end pattern
- 		if d1 == isLeapYear(y1)[m1-1]:
- 			m1, d1, counter = m1 + 1, 1, counter + 1
- 		# not year and or month end
- 		else:
- 			d1, counter = d1 + 1, counter + 1
- 	return counter
+    if (y1 > y2) or (y1 == y2 and m1 > m2) or (y1 == y2 and m1 == m2 and d1 > d2):
+        print('incorrect input!')
+        return None
+    counter = 0
+    while (y1 < y2) or (m1 < m2) or (d1 < d2):
+        # year end pattern
+        if m1 == 12 and d1 == isLeapYear(y1)[11]:
+            y1, m1, d1, counter = y1 + 1, 1, 1, counter + 1
+            # month end pattern
+        elif d1 == isLeapYear(y1)[m1-1]:
+            m1, d1, counter = m1 + 1, 1, counter + 1
+                # not year and or month end
+        else:
+            d1, counter = d1 + 1, counter + 1
+    return counter
 
 def test():
     test_cases = [((2012,1,1,2012,2,28), 58),
@@ -48,7 +48,7 @@ def test():
                   ((1900,1,1,1999,12,31), 36523),
                   ((1901,12,1,1900,1,31), None),
                   ((1900,12,1,1900,1,1), None),
-                  ((1900,12,1,1900,12,1), None)
+                  ((1900,12,1,1900,12,1), 0)
                   ]
 
     for (args, answer) in test_cases:
