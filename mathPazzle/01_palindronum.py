@@ -1,27 +1,42 @@
-def base_two(number):
-	base_two = ''
-	while number > 0:
-		base_two = str(number%2) + base_two
-		# print(base_two)
-		number = number // 2
-		print(number)
-	return base_two
+# find n(> 9), which is palindrome in base10, base2 and base8.
 
-def base_eight(number):
-	base_eight = ''
-	while number > 0:
-		base_eight = str(number%8) + base_eight
-		# print(base_eight)
-		number = number // 8
-	return base_eight
+# 2017/2/18(Sat)
 
-def palindro_num(number):
-	for ni in range(1,number):
-		base_two_number = base_two(ni)
-		base_eight_number = base_eight(ni)
-		print("base10:{}, base2:{}, base8:{}".format(ni,base_two_number,base_eight_number))
-		if (ni >=10) and (str(ni) == str(ni)[::-1]) and (base_two_number == base_two_number[::-1]) and (base_eight_number == base_eight_number[::-1]):
-			return ni
+def convert_base2(number):
+	if number <= 0:
+		raise ValueError
+	n = number
+	result = ""
+	while n >= 2:
+		result = str(n % 2) + result
+		n = n // 2
+	return str(n) + result
+
+def convert_base8(number):
+	if number <= 0:
+		raise ValueError
+	n = number
+	result = ""
+	while n >= 8:
+		result = str(n % 8) + result
+		n = n // 8
+	return str(n) + result
+
+def palindrome_check(string):
+	return string == string[::-1]
+
+def palindronumber_1():
+	n = 10
+	while True:
+		if palindrome_check(str(n)) and palindrome_check(convert_base2(n)) and palindrome_check(convert_base8(n)):
+			return n
+		n += 1
+
+print(palindronumber_1())
 
 
-print(palindro_num(1000))
+
+
+
+
+
