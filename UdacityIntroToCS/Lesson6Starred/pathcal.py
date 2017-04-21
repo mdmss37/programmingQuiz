@@ -35,14 +35,14 @@ def triangle(n):
         return result
     else:
         result = triangle(n-1)
-        print("result before loop:{}".format(result))
+        # print("result before loop:{}".format(result))
         temp = [1]
         last_row = triangle(n-1)[-1]
         for i in range(0, n-2):
             temp.append(last_row[i]+last_row[i+1])
         temp.append(1)
         result.append(temp)
-        print("result after loop:{}".format(result))
+        # print("result after loop:{}".format(result))
     return result
 
 #For example:
@@ -60,3 +60,39 @@ print triangle(3)
 
 print triangle(6)
 #>>> [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1], [1, 5, 10, 10, 5, 1]]
+
+
+def make_next_row(row):
+    result = []
+    prev = 0
+    for n in row:
+        result.append(prev + n)
+        prev = n
+    result.append(prev)
+    return result
+
+def triangle(n):
+    result = []
+    current = [1]
+    for unused in range(0, n):
+        result.append(current)
+        current = make_next_row(current)
+    return result
+
+#For example:
+print triangle(0)
+#>>> []
+
+print triangle(1)
+#>>> [[1]]
+
+print triangle(2)
+#>> [[1], [1, 1]]
+
+print triangle(3)
+#>>> [[1], [1, 1], [1, 2, 1]]
+
+print triangle(6)
+#>>> [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1], [1, 5, 10, 10, 5, 1]]
+
+
